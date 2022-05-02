@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+select,
+button,
+input,
+textarea {
+    outline: none;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-image: url('../img/background.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat-y;
+}
+
+#header {
+    font-size: 20px;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    margin: 20px auto;
+    max-width: 500px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.formContainer {
+    background-color: black;
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto 15px;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.title {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.formContainer input {
+    padding: 10px;
+    font-size: 15px;
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    background-color: white;
+    margin-bottom: 8px;
+}
+
+.formContainer textarea {
+    width: 100%;
+    display: block;
+    padding: 10px;
+    font-size: 15px;
+    resize: vertical;
+    height: 250px;
+    margin-bottom: 8px;
+}
+
+.formContainer button {
+    display: inline-block;
+    font-size: 15px;
+    padding: 10px 30px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.hide {
+    display: none !important;
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <!--Title & Meta-->
+    <title>My Bobcat (TV)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height, viewport-fit=cover">
+
+    <!--CSS & Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link href="/css/forms.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="header">My Bobcat (TV)</div>
+
+    <div class="formContainer">
+        <div class="title">Upload The PNG File</div>
+        <form id="uploadAd">
+            <input type="file" name="image" accept="image/x-png" required>
+            <input type="password" name="password" placeholder="super secure password" required>
+            <button>Upload</button>
+        </form>
+    </div>
+
+    <div class="formContainer">
+        <div class="title">Enter The Video URL</div>
+        <form file="ad.txt">
+            <input type="text" name="data" required>
+            <input type="password" name="password" placeholder="super secure password" required>
+            <button>Update</button>
+        </form>
+    </div>
+
+    <div class="formContainer">
+        <div class="title">Disable Ad</div>
+        <form file="ad.txt">
+            <input type="text" name="data" value="1" class="hide">
+            <input type="password" name="password" placeholder="super secure password" required>
+            <button>Disable</button>
+        </form>
+    </div>
+
+    <script src="/js/forms.js"></script>
+
+</body>
+
+</html>

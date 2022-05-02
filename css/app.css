@@ -1,0 +1,308 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+select,
+button,
+input,
+textarea {
+    outline: none;
+    border: none;
+    font-family: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+/* header */
+#header {
+    background-color: #A00000;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 25px;
+    padding-top: env(safe-area-inset-top);
+}
+
+#header div {
+    padding: 10px 0;
+}
+
+/*slider*/
+.swiper {
+    flex-grow: 1;
+    background-color: #DADADA;
+    margin: 0 !important;
+    /* iOS prevents overflow-y */
+    height: 1px;
+}
+
+.swiper-slide {
+    padding: 10px;
+    width: 100% !important;
+    overflow-y: auto;
+}
+
+/*footer */
+#footer {
+    background-color: #393f9f;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+#nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.navItem {
+    height: 60px;
+    width: 60px;
+    background-color: #292d70;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.navItem.active {
+    background-color: #A00000;
+}
+
+/*general rules*/
+.card {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    margin-bottom: 15px;
+    color: black;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.hr {
+    border: 2px solid #A00000;
+    margin: 10px auto;
+    background-color: #A00000;
+}
+
+.large {
+    font-size: 25px !important;
+}
+
+.medium {
+    font-size: 20px !important;
+}
+
+.small {
+    font-size: 15px !important;
+}
+
+.hide {
+    display: none;
+}
+
+/****Home******/
+#dayLabel,
+#dayClock,
+#announcements {
+    text-align: center;
+    padding: 8px 16px;
+}
+
+#bobcatTV {
+    display: block;
+    max-width: 640px;
+    margin: 0 auto 15px;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+#bobcatTVFrame {
+    display: none;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+}
+
+#bobcatTVFrame.active {
+    display: block;
+}
+
+#bobcatTVFrame>iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+/********Schedule******/
+
+#scheduleTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#scheduleTable td:nth-child(even) {
+    background-color: #cccccc;
+}
+
+#scheduleTable td {
+    padding: 3px;
+}
+
+#scheduleNotice {
+    text-align: center;
+}
+
+@media(max-width: 750px) {
+    #scheduleTable {
+        font-size: 13px !important;
+    }
+}
+
+
+/********Calculator******/
+#calculatorSelector {
+    display: flex;
+    flex-direction: column;
+}
+
+#calculatorSelector>div {
+    flex-grow: 1;
+    padding: 8px 16px;
+    border-bottom: 6px solid #DADADA;
+    cursor: pointer;
+}
+
+#calculatorSelector>div.active {
+    border-bottom: 6px solid #A00000;
+}
+
+.GPAItem {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #DADADA;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.GPAClass {
+    border: 1px solid black !important;
+    border-radius: 0px;
+    font-size: 18px;
+    flex-grow: 1;
+    padding: 10px;
+    width: 100%;
+}
+
+.GPACredits,
+.GPAGrade {
+    border: 1px solid black;
+    border-radius: 0px;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+#GPAButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#GPAButtons>div {
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+#GPANotice {
+    margin-top: 20px;
+}
+
+.finalGradeRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.finalGradeRow div,
+.finalGradeRow select {
+    width: 19%;
+    text-align: center;
+}
+
+.finalGradeRow select,
+.finalGradeRow select option {
+    border: 1px solid black;
+    border-radius: 0px;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+#finalGradeButton {
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#finalGradeNotice {
+    margin-top: 20px;
+}
+
+@media (min-width: 1750px) {
+    #dayLabel {
+        font-size: 100px !important;
+    }
+}
