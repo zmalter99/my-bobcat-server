@@ -178,7 +178,7 @@ async function setup() {
         </div>        
     `);
     document.querySelector("#bobcatTV").addEventListener("click", function () {
-        element.querySelector("#bobcatTVFrame").classList.toggle("active");
+        document.querySelector("#bobcatTVFrame").classList.toggle("active");
     });
 
 }
