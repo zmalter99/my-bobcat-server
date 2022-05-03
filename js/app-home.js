@@ -147,21 +147,18 @@ async function setup() {
     if (app.day == 0) {
         document.querySelector("#dayLabel").innerHTML = `🚨<b>Special Alert</b>🚨`;
         document.querySelector("#dayClock").innerHTML = app.info;
-        return;
     }
 
     // if its a weekend
-    if (new Date().getDay() == 6 || new Date().getDay() == 0) {
+    else if (new Date().getDay() == 6 || new Date().getDay() == 0) {
         document.querySelector("#dayLabel").innerHTML = `Next Day Is: <b>${app.day}</b>`;
         document.querySelector("#dayClock").innerHTML = "No School Today";
-        return;
     }
 
     // is current time is pass 2:25PM school is over
-    if (currentTime > convertTime("14:25")) {
+    else if (currentTime > convertTime("14:25")) {
         document.querySelector("#dayLabel").innerHTML = `Tomorrow Is Day: <b>${app.day}</b>`;
         document.querySelector("#dayClock").innerHTML = "School has finished";
-        return;
     }
 
     // otherwise we update the clock every second
