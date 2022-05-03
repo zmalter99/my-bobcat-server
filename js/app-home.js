@@ -138,77 +138,62 @@ function updateClock() {
 
 //-----------------------------------------------------------------------------------------------//
 
-//Drop Day which also starts initalization
-let day;
-const randomNumber = new Date().getTime();
-fetch(`https://api.maltertech.com/mybobcat/get.php?file=day`)
-    .then(function (data) {
-        return data.text();
-    }).then(function (data) {
-        day = data;
-
-        //if special alert
-        if (day == 0) {
-            document.querySelector("#dayLabel").innerHTML = `🚨<b>Special Alert</b>🚨`;
-            fetch(`https://api.maltertech.com/mybobcat/get.php?file=info`)
-                .then(function (data) {
-                    return data.text();
-                }).then(function (data) {
-                    document.querySelector("#dayClock").innerHTML = data;
-                });
-            return;
-        }
-
-        // if its a weekend
-        if (new Date().getDay() == 6 || new Date().getDay() == 0) {
-            document.querySelector("#dayLabel").innerHTML = `Next Day Is: <b>${day}</b>`;
-            document.querySelector("#dayClock").innerHTML = "No School Today";
-            return;
-        }
-
-        // is current time is pass 2:25PM school is over
-        if (currentTime > convertTime("14:25")) {
-            document.querySelector("#dayLabel").innerHTML = `Tomorrow Is Day: <b>${day}</b>`;
-            document.querySelector("#dayClock").innerHTML = "School has finished";
-            return;
-        }
-
-        // otherwise we update the clock every second
-        document.querySelector("#dayLabel").innerHTML = `Today Is Day: <b>${day}</b>`;
-        setInterval(function () {
-            updateClock();
-        }, 1000);
-
-    });
+async function setup() {
+    const app = await fetch("https://api.maltertech.com/mybobcat/get.php")
+        .then(data => data.json())
 
 
-//annocunements fetch request
-fetch(`https://api.maltertech.com/mybobcat/get.php?file=announcements`)
-    .then(function (data) {
-        return data.text();
-    }).then(function (data) {
-        document.querySelector("#announcements").innerHTML = data;
-    });
+    //Drop Day which also starts initalization
+    fetch(`https://api.maltertech.com/mybobcat/get.php?file=day`)
+        .then(data => data.json())
+        .then(function (app) {
 
-//bobcat tv fetch request
-fetch(`https://api.maltertech.com/mybobcat/get.php?file=ad`)
-    .then(function (data) {
-        return data.json();
-    })
-    .then(function (data) {
-        if (data.active) {
-            document.querySelector("#announcements").insertAdjacentHTML("afterend", `
-                <img src="${data.image}" id="bobcatTV">
-                <div id="bobcatTVFrame">
-                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/${data.url.replace("https://youtu.be", "")}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>        
-            `);
-            document.querySelector("#bobcatTV").addEventListener("click", function () {
-                if (document.querySelector("#bobcatTVFrame").classList.contains("active")) {
-                    document.querySelector("#bobcatTVFrame").classList.remove("active");
-                } else {
-                    document.querySelector("#bobcatTVFrame").classList.add("active");
-                }
-            });
-        }
-    });
+            //if special alert
+            if (app.day == 0) {
+                document.querySelector("#dayLabel").innerHTML = `🚨<b>Special Alert</b>🚨`;
+                document.querySelector("#dayClock").innerHTML = app.info;
+                return;
+            }
+
+            // if its a weekend
+            if (new Date().getDay() == 6 || new Date().getDay() == 0) {
+                document.querySelector("#dayLabel").innerHTML = `Next Day Is: <b>${app.day}</b>`;
+                document.querySelector("#dayClock").innerHTML = "No School Today";
+                return;
+            }
+
+            // is current time is pass 2:25PM school is over
+            if (currentTime > convertTime("14:25")) {
+                document.querySelector("#dayLabel").innerHTML = `Tomorrow Is Day: <b>${app.day}</b>`;
+                document.querySelector("#dayClock").innerHTML = "School has finished";
+                return;
+            }
+
+            // otherwise we update the clock every second
+            document.querySelector("#dayLabel").innerHTML = `Today Is Day: <b>${app.day}</b>`;
+            setInterval(function () {
+                updateClock();
+            }, 1000);
+
+        });
+
+
+    //annocunements fetch request
+    document.querySelector("#announcements").innerHTML = app.announcements;
+
+    //bobcat tv fetch request
+    if (app.adStatus) {
+        document.querySelector("#announcements").insertAdjacentHTML("afterend", `
+            <img src="${app.adImage}" id="bobcatTV">
+            <div id="bobcatTVFrame">
+                <iframe width="1280" height="720" src="https://www.youtube.com/embed/${app.adURL.replace("https://youtu.be", "")}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>        
+        `);
+        document.querySelector("#bobcatTV").addEventListener("click", function () {
+            element.querySelector("#bobcatTVFrame").classList.toggle("active");
+        });
+    }
+
+}
+
+setup();
