@@ -25,7 +25,7 @@ document.querySelectorAll("form:not(#uploadAd)").forEach(function (element) {
         let formData = new FormData(this);
         formData.set("file", this.getAttribute("file"));
 
-        fetch("/php/update.php", {
+        fetch("https://api.maltertech.com/mybobcat/update.php", {
                 method: "POST",
                 body: formData
             })
@@ -50,7 +50,7 @@ document.querySelectorAll("#uploadAd").forEach(function (element) {
 
         let formData = new FormData(this);
 
-        fetch("/php/uploadAd.php", {
+        fetch("https://api.maltertech.com/mybobcat/uploadAd.php", {
                 method: "POST",
                 body: formData
             })

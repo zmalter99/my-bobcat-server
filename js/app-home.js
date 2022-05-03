@@ -141,7 +141,7 @@ function updateClock() {
 //Drop Day which also starts initalization
 let day;
 const randomNumber = new Date().getTime();
-fetch(`/php/data/day.txt?${randomNumber}`)
+fetch(`https://api.maltertech.com/mybobcat/get.php?file=day`)
     .then(function (data) {
         return data.text();
     }).then(function (data) {
@@ -150,7 +150,7 @@ fetch(`/php/data/day.txt?${randomNumber}`)
         //if special alert
         if (day == 0) {
             document.querySelector("#dayLabel").innerHTML = `🚨<b>Special Alert</b>🚨`;
-            fetch(`/php/data/info.txt?${randomNumber}`)
+            fetch(`https://api.maltertech.com/mybobcat/get.php?file=info`)
                 .then(function (data) {
                     return data.text();
                 }).then(function (data) {
@@ -183,7 +183,7 @@ fetch(`/php/data/day.txt?${randomNumber}`)
 
 
 //annocunements fetch request
-fetch(`/php/data/announcements.txt?${randomNumber}`)
+fetch(`https://api.maltertech.com/mybobcat/get.php?file=announcements`)
     .then(function (data) {
         return data.text();
     }).then(function (data) {
@@ -191,17 +191,16 @@ fetch(`/php/data/announcements.txt?${randomNumber}`)
     });
 
 //bobcat tv fetch request
-fetch(`/php/data/ad.txt?${randomNumber}`)
+fetch(`https://api.maltertech.com/mybobcat/get.php?file=ad`)
     .then(function (data) {
-        return data.text();
+        return data.json();
     })
     .then(function (data) {
-        if (data != "1") {
-            let rawURL = "https://www.youtube.com/watch?v=WKsPez_EuZg".split("?v=")[1];
+        if (data.active) {
             document.querySelector("#announcements").insertAdjacentHTML("afterend", `
-                <img src="/php/data/ad.png?${randomNumber}" id="bobcatTV">
+                <img src="${data.image}" id="bobcatTV">
                 <div id="bobcatTVFrame">
-                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/${rawURL}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/${data.url.replace("https://youtu.be", "")}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>        
             `);
             document.querySelector("#bobcatTV").addEventListener("click", function () {
