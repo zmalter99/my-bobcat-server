@@ -23,7 +23,7 @@ document.querySelectorAll("form:not(#uploadAd)").forEach(function (element) {
         e.preventDefault();
 
         let formData = new FormData(this);
-        formData.set("file", this.getAttribute("file"));
+        formData.set("key", this.getAttribute("key"));
 
         fetch("https://api.maltertech.com/mybobcat/update.php", {
                 method: "POST",

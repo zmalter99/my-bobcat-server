@@ -112,7 +112,7 @@ function updateClock() {
         if (currentTime > schedule[i].start && currentTime < schedule[i].end) {
             // check if prefix equals Period
             if (schedule[i].prefix == "Period") {
-                document.querySelector("#dayClock").innerHTML = `${getTimeRemaining(schedule[i].end)} remaining in Period <b>${periods[day][schedule[i].periodIndex]}</b>`;
+                document.querySelector("#dayClock").innerHTML = `${getTimeRemaining(schedule[i].end)} remaining in Period <b>${periods[app.day][schedule[i].periodIndex]}</b>`;
             }
             // otherwise it's Lunch
             else {
@@ -125,7 +125,7 @@ function updateClock() {
         if (currentTime > schedule[i].end && currentTime < schedule[i + 1].start) {
             // check if prefix equals Period
             if (schedule[i].prefix == "Period") {
-                document.querySelector("#dayClock").innerHTML = `${getTimeRemaining(schedule[i+1].start)} until Period <b>${periods[day][schedule[i+1].periodIndex]}</b>`;
+                document.querySelector("#dayClock").innerHTML = `${getTimeRemaining(schedule[i+1].start)} until Period <b>${periods[app.day][schedule[i+1].periodIndex]}</b>`;
             }
             // note since period 3 and lunch both end and start at 11:30 there will never be an instance where an else is required
             break;
@@ -138,61 +138,51 @@ function updateClock() {
 
 //-----------------------------------------------------------------------------------------------//
 
+let app;
 async function setup() {
-    const app = await fetch("https://api.maltertech.com/mybobcat/get.php")
+    app = await fetch("https://api.maltertech.com/mybobcat/get.php")
         .then(data => data.json())
 
+    //if special alert
+    if (app.day == 0) {
+        document.querySelector("#dayLabel").innerHTML = `🚨<b>Special Alert</b>🚨`;
+        document.querySelector("#dayClock").innerHTML = app.info;
+        return;
+    }
 
-    //Drop Day which also starts initalization
-    fetch(`https://api.maltertech.com/mybobcat/get.php?file=day`)
-        .then(data => data.json())
-        .then(function (app) {
+    // if its a weekend
+    if (new Date().getDay() == 6 || new Date().getDay() == 0) {
+        document.querySelector("#dayLabel").innerHTML = `Next Day Is: <b>${app.day}</b>`;
+        document.querySelector("#dayClock").innerHTML = "No School Today";
+        return;
+    }
 
-            //if special alert
-            if (app.day == 0) {
-                document.querySelector("#dayLabel").innerHTML = `🚨<b>Special Alert</b>🚨`;
-                document.querySelector("#dayClock").innerHTML = app.info;
-                return;
-            }
+    // is current time is pass 2:25PM school is over
+    if (currentTime > convertTime("14:25")) {
+        document.querySelector("#dayLabel").innerHTML = `Tomorrow Is Day: <b>${app.day}</b>`;
+        document.querySelector("#dayClock").innerHTML = "School has finished";
+        return;
+    }
 
-            // if its a weekend
-            if (new Date().getDay() == 6 || new Date().getDay() == 0) {
-                document.querySelector("#dayLabel").innerHTML = `Next Day Is: <b>${app.day}</b>`;
-                document.querySelector("#dayClock").innerHTML = "No School Today";
-                return;
-            }
-
-            // is current time is pass 2:25PM school is over
-            if (currentTime > convertTime("14:25")) {
-                document.querySelector("#dayLabel").innerHTML = `Tomorrow Is Day: <b>${app.day}</b>`;
-                document.querySelector("#dayClock").innerHTML = "School has finished";
-                return;
-            }
-
-            // otherwise we update the clock every second
-            document.querySelector("#dayLabel").innerHTML = `Today Is Day: <b>${app.day}</b>`;
-            setInterval(function () {
-                updateClock();
-            }, 1000);
-
-        });
-
+    // otherwise we update the clock every second
+    document.querySelector("#dayLabel").innerHTML = `Today Is Day: <b>${app.day}</b>`;
+    setInterval(function () {
+        updateClock();
+    }, 1000);
 
     //annocunements fetch request
     document.querySelector("#announcements").innerHTML = app.announcements;
 
     //bobcat tv fetch request
-    if (app.adStatus) {
-        document.querySelector("#announcements").insertAdjacentHTML("afterend", `
-            <img src="${app.adImage}" id="bobcatTV">
-            <div id="bobcatTVFrame">
-                <iframe width="1280" height="720" src="https://www.youtube.com/embed/${app.adURL.replace("https://youtu.be", "")}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>        
-        `);
-        document.querySelector("#bobcatTV").addEventListener("click", function () {
-            element.querySelector("#bobcatTVFrame").classList.toggle("active");
-        });
-    }
+    document.querySelector("#announcements").insertAdjacentHTML("afterend", `
+        <img src="https://cdn.maltertech.com/mybobcat/ad.png" id="bobcatTV">
+        <div id="bobcatTVFrame">
+            <iframe width="1280" height="720" src="https://www.youtube.com/embed/${app.adURL.replace("https://youtu.be", "")}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>        
+    `);
+    document.querySelector("#bobcatTV").addEventListener("click", function () {
+        element.querySelector("#bobcatTVFrame").classList.toggle("active");
+    });
 
 }
 
