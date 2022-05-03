@@ -1,20 +1,16 @@
-const randomNumber = new Date().getTime();
-
-
 //Get pre-exisiting data
-document.querySelectorAll("form:not(#uploadAd)").forEach(async function (element) {
-    let path = `/php/data/${element.getAttribute("file")}?${randomNumber}`;
-    let response = await fetch(path).then(function (data) {
-        return data.text();
-    });
-
-    let firstElement = element.firstElementChild;
-    if (firstElement.nodeName == "INPUT") {
-        firstElement.setAttribute("placeholder", response);
-    } else if (firstElement.nodeName == "TEXTAREA") {
-        firstElement.value = response;
-    }
-})
+fetch("https://api.maltertech.com/mybobcat/get.php")
+    .then(data => data.json())
+    .then(function (app) {
+        document.querySelectorAll("form:not(#uploadAd) > :nth-child(1)").forEach(function (element) {
+            let name = app[element.parentElement.getAttribute("key")]
+            if (element.nodeName == "INPUT") {
+                element.setAttribute("placeholder", name);
+            } else if (element.nodeName == "TEXTAREA") {
+                element.value = name;
+            }
+        });
+    })
 
 
 // form setup
