@@ -2,9 +2,45 @@
 let currentTime = getSeconds();
 
 // get the exact amount of seconds relative to 00:00
+var todaysDay = 1;
 function getSeconds() {
     let exactDate = new Date();
     return (exactDate.getHours() * 3600) + (exactDate.getMinutes() * 60) + exactDate.getSeconds();
+}
+
+//Days since first day of school
+//(I will update it to the first day of school next year)
+function getSchoolDay()
+{
+  //may 23 was a day 5
+  const firstDay = new Date(2022,05,23);
+  const today = new Date();
+  var diff = today.getDate()-firstDay.getDate();
+  //I don't know why it's one behind for may, it seems to be fine for other months
+  if(today.getMonth()==6)
+  {
+    diff += 1;
+  }
+  //subtract weekends from number of days since first day
+  if(diff%6==0)
+  {
+    diff = (diff/6)*5;
+  }
+  else if(diff%7==0)
+  {
+    diff = (diff/7)*5;
+  }
+  else if(diff>7)
+  {
+    diff = diff-(2*Math.floor(diff/7));
+  }
+  todaysDay = (diff%8)+5;
+}
+
+
+function getTodaysDay()
+{
+  return todaysDay;
 }
 
 //-----------------------------------------------------------------------------------------------//
@@ -112,7 +148,7 @@ function updateClock() {
         if (currentTime > schedule[i].start && currentTime < schedule[i].end) {
             // check if prefix equals Period
             if (schedule[i].prefix == "Period") {
-                document.querySelector("#dayClock").innerHTML = `${getTimeRemaining(schedule[i].end)} remaining in Period <b>${periods[app.day][schedule[i].periodIndex]}</b>`;
+                document.querySelector("#dayClock").innerHTML = `${getTimeRemaining(schedule[i].end)} remaining in Period <b>${periods[todaysDay][schedule[i].periodIndex]}</b>`;
             }
             // otherwise it's Lunch
             else {
@@ -151,18 +187,18 @@ async function setup() {
 
     // if its a weekend
     else if (new Date().getDay() == 6 || new Date().getDay() == 0) {
-        document.querySelector("#dayLabel").innerHTML = `Next Day Is: <b>${app.day}</b>`;
+        document.querySelector("#dayLabel").innerHTML = `Next Day Is: <b>${todaysDay+1}</b>`;
         document.querySelector("#dayClock").innerHTML = "No School Today";
     }
 
     // is current time is pass 2:25PM school is over
     else if (currentTime > convertTime("14:25")) {
-        document.querySelector("#dayLabel").innerHTML = `Tomorrow Is Day: <b>${app.day}</b>`;
+        document.querySelector("#dayLabel").innerHTML = `Tomorrow Is Day: <b>${todaysDay+1}</b>`;
         document.querySelector("#dayClock").innerHTML = "School has finished";
     }
 
     // otherwise we update the clock every second
-    document.querySelector("#dayLabel").innerHTML = `Today Is Day: <b>${app.day}</b>`;
+    document.querySelector("#dayLabel").innerHTML = `Today Is Day: <b>${todaysDay}</b>`;
     setInterval(function () {
         updateClock();
     }, 1000);
