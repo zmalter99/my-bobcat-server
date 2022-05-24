@@ -175,10 +175,12 @@ body {
 /********Schedule******/
 
 #scheduleTable {
+    table-layout: auto;
     width: 100%;
     border-collapse: collapse;
     text-align: center;
     margin-bottom: 10px;
+    overflow-x: scroll
 }
 
 #scheduleTable td:nth-child(even) {
