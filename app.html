@@ -37,9 +37,13 @@
 
             <!--Home-->
             <div class="swiper-slide">
-                <div id="dayLabel" class="card large">
+                <!--<div id="dayLabel" class="card large">
                     <i class="fa-spin fal fa-spinner-third fa-2x"></i>
-                </div>
+                  
+                  
+                </div>-->
+              <div id="dayLabel" class="card large"></div>
+              <body onload="getSchoolDay()">
                 <div id="dayClock" class="card medium">
                     <i class="fa-spin fal fa-spinner-third fa-2x"></i>
                 </div>
@@ -49,6 +53,7 @@
             </div>
 
             <!--Schedule-->
+          <body onload="replaceLines()">
             <div class="swiper-slide">
                 <div class="card">
                     <table id="scheduleTable" class="medium">
@@ -75,6 +80,17 @@
                             <td>OH</td>
                         </tr>
                         <tr>
+                            <td></td>
+                            <td id="blankA"></td>
+                            <td id="blankB"></td>
+                            <td id="blankC"></td>
+                            <td id="blankD"></td>
+                            <td id="blankE"></td>
+                            <td id="blankF"></td>
+                            <td id="blankG"></td>
+                            <td id="blankH"></td>
+                        </tr>
+                        <tr>
                             <td>8:10-9:14</td>
                             <td>1</td>
                             <td>1</td>
@@ -84,6 +100,17 @@
                             <td>1</td>
                             <td>1</td>
                             <td>2</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="oneA"></td>
+                            <td id="oneB"></td>
+                            <td id="oneC"></td>
+                            <td id="oneD"></td>
+                            <td id="oneE"></td>
+                            <td id="oneF"></td>
+                            <td id="oneG"></td>
+                            <td id="oneH"></td>
                         </tr>
                         <tr>
                             <td>9:18-10:22</td>
@@ -97,6 +124,17 @@
                             <td>3</td>
                         </tr>
                         <tr>
+                            <td></td>
+                            <td id="twoA"></td>
+                            <td id="twoB"></td>
+                            <td id="twoC"></td>
+                            <td id="twoD"></td>
+                            <td id="twoE"></td>
+                            <td id="twoF"></td>
+                            <td id="twoG"></td>
+                            <td id="twoH"></td>
+                        </tr>
+                        <tr>
                             <td>10:26-11:30</td>
                             <td>3</td>
                             <td>5</td>
@@ -106,6 +144,17 @@
                             <td>3</td>
                             <td>5</td>
                             <td>4</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="threeA"></td>
+                            <td id="threeB"></td>
+                            <td id="threeC"></td>
+                            <td id="threeD"></td>
+                            <td id="threeE"></td>
+                            <td id="threeF"></td>
+                            <td id="threeG"></td>
+                            <td id="threeH"></td>
                         </tr>
                         <tr>
                             <td>11:30-12:13</td>
@@ -130,6 +179,17 @@
                             <td>7</td>
                         </tr>
                         <tr>
+                            <td></td>
+                            <td id="fourA"></td>
+                            <td id="fourB"></td>
+                            <td id="fourC"></td>
+                            <td id="fourD"></td>
+                            <td id="fourE"></td>
+                            <td id="fourF"></td>
+                            <td id="fourG"></td>
+                            <td id="fourH"></td>
+                        </tr>
+                        <tr>
                             <td>1:21-2:25</td>
                             <td>7</td>
                             <td>8</td>
@@ -140,9 +200,39 @@
                             <td>8</td>
                             <td>8</td>
                         </tr>
+                        <tr>
+                            <td></td>
+                            <td id="fiveA"></td>
+                            <td id="fiveB"></td>
+                            <td id="fiveC"></td>
+                            <td id="fiveD"></td>
+                            <td id="fiveE"></td>
+                            <td id="fiveF"></td>
+                            <td id="fiveG"></td>
+                            <td id="fiveH"></td>
+                        </tr>
                     </table>
                     <div id="scheduleNotice" class="small">*OH - Office Hours</div>
-
+                  <div id="inputForSchedule">
+                    
+                  <!-- Input for the classes-->
+                  Input your classes <br>
+                    <input type="text" id="classOne" placeholder="Class One"> <br>
+                  <input type="text" id="classTwo" placeholder="Class Two"> <br>
+                  <input type="text" id="classThree" placeholder="Class Three"> <br>
+                  <input type="text" id="classFour" placeholder="Class Four"> <br>
+                  <input type="text" id="classFive" placeholder="Class Five"> <br>
+                  <input type="text" id="classSix" placeholder="Class Six"> <br>
+                   <input type="text" id="classSeven" placeholder="Class Seven"> <br>
+                    <input type="text" id="classEight" placeholder="Class Eight"> <br>
+                    <script src="/js/scheduleTwo.js"></script>
+                    
+                  <!--This button puts all of the inputted classes in the schedule -->
+                    <button id="button">Click here to add/change classes</button>
+                    
+                    <script src="/js/schedule.js"></script>
+                    
+                  </div>
                 </div>
             </div>
 
@@ -291,6 +381,7 @@
     <script src="/js/app.js?1651764633"></script>
     <script src="/js/app-home.js?1651764633"></script>
     <script src="/js/app-calculator.js?1651764633"></script>
+    
 </body>
 
 </html>
