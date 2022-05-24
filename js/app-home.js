@@ -1,3 +1,10 @@
+//functions that happen when the site loads
+function functionsOnLoad() {
+  replaceLines();
+  getSchoolDay();
+}
+window.onload=functionsOnLoad;
+
 // global time variable 
 let currentTime = getSeconds();
 
