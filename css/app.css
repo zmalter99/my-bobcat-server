@@ -183,8 +183,45 @@ body {
     overflow-x: scroll
 }
 
-#scheduleTable td:nth-child(even) {
+#scheduleTable {
+    background-color: #ffffff;
+}
+
+#scheduleTable tr:nth-child(3) {
+    color: #cccccc;
+}
+
+#scheduleTable tr:nth-child(2) {
     background-color: #cccccc;
+}
+
+#scheduleTable tr:nth-child(3) {
+    background-color: #cccccc;
+}
+
+#scheduleTable tr:nth-child(6) {
+    background-color: #cccccc;
+}
+
+#scheduleTable tr:nth-child(7) {
+    background-color: #cccccc;
+}
+
+#scheduleTable tr:nth-child(10) {
+    background-color: #cccccc;
+}
+
+#scheduleTable tr:nth-child(13) {
+    background-color: #cccccc;
+}
+
+#scheduleTable tr:nth-child(14) {
+    background-color: #cccccc;
+}
+
+#scheduleTable tr:nth-child(1) {
+    font-weight: bold;
+    height: 40px;
 }
 
 #scheduleTable td {
