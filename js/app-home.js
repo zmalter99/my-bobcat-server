@@ -1,3 +1,9 @@
+//functions that happen when the site loads
+function functionsOnLoad() {
+  replaceLines();
+}
+window.onload=functionsOnLoad;
+
 // global time variable 
 let currentTime = getSeconds();
 
@@ -198,6 +204,7 @@ async function setup() {
     }
 
     // otherwise we update the clock every second
+    getSchoolDay();
     document.querySelector("#dayLabel").innerHTML = `Today Is Day: <b>${todaysDay}</b>`;
     setInterval(function () {
         updateClock();
