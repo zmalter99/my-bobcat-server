@@ -1,7 +1,6 @@
 //functions that happen when the site loads
 function functionsOnLoad() {
   replaceLines();
-  getSchoolDay();
 }
 window.onload=functionsOnLoad;
 
@@ -205,6 +204,7 @@ async function setup() {
     }
 
     // otherwise we update the clock every second
+    getSchoolDay();
     document.querySelector("#dayLabel").innerHTML = `Today Is Day: <b>${todaysDay}</b>`;
     setInterval(function () {
         updateClock();
